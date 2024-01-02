@@ -1,0 +1,24 @@
+var elements = document.querySelectorAll("a.igBotQueueAcctUserName");
+
+if (elements.length > 0) {
+    var textContents = [];
+
+    elements.forEach(function(element) {
+        textContents.push(element.textContent);
+    });
+
+    var downloadLink = document.createElement("a");
+    downloadLink.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(textContents.join("\n")));
+    downloadLink.setAttribute("download", "usernames.txt");
+    downloadLink.style.display = "none";
+
+    document.body.appendChild(downloadLink);
+
+    // Trigger the download
+    downloadLink.click();
+
+    // Remove the link from the document
+    document.body.removeChild(downloadLink);
+} else {
+    console.log("No elements found.");
+}
